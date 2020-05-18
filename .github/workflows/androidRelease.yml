@@ -13,14 +13,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name: Build with Gradle
-      env:
-        RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
-        RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
-        RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
-      run: ./gradlew assembleRelease
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: app-release.apk
-        path: app/build/outputs/apk/release/
+    - name: Get VersionName
+      run: |
+        export versionName=./gradlew -q getVersionName
+        echo "::set-env name=versionName::$versionName"
+    - name: Echo VersionName
+      run: echo "app-release-{{$versionName}}.apk"
