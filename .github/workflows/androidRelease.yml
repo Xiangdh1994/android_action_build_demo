@@ -18,4 +18,4 @@ jobs:
         export versionName=$(./gradlew -q getVersionName)
         echo "::set-env name=versionName::$versionName"
     - name: Echo VersionName
-      run: echo "app-release-{{$versionName}}.apk"
+      run: echo "app-release-{$versionName}.apk"
