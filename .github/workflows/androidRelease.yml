@@ -19,3 +19,14 @@ jobs:
         echo "::set-env name=versionName::$versionName"
     - name: Echo VersionName
       run: echo "app-release-V${versionName}.apk"
+    - name: Build with Gradle
+      env:
+        RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
+        RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+        RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
+      run: ./gradlew assembleRelease
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release-V${versionName}.apk
+        path: app/build/outputs/apk/release/
