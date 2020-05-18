@@ -15,7 +15,7 @@ jobs:
         java-version: 1.8
     - name: Get VersionName
       run: |
-        export versionName=./gradlew -q getVersionName
+        export versionName=$(./gradlew -q getVersionName)
         echo "::set-env name=versionName::$versionName"
     - name: Echo VersionName
       run: echo "app-release-{{$versionName}}.apk"
