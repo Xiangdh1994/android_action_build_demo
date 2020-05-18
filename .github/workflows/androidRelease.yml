@@ -28,5 +28,5 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: app-release-V${versionName}.apk
+        name: app-release-V${{ env.versionName }}.apk
         path: app/build/outputs/apk/release/
