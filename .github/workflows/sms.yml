@@ -1,11 +1,11 @@
 name: sms when pull
 
-on:
-  pull_request
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, 'sms')"
     steps:
     - uses: actions/checkout@v2
     - name: 'Sending SMS Notification'
