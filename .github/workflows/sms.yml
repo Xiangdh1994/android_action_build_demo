@@ -1,0 +1,20 @@
+name: sms when pull
+
+on:
+  pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: 'Sending SMS Notification'
+      uses: twilio-labs/actions-sms@v1
+      with:
+        fromPhoneNumber: '+18506000758'
+        toPhoneNumber: '+8613476228011'
+        message: '${{ github.actor }} Pull'
+      env:
+        TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+        TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
+        TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
